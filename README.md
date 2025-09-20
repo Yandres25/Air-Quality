@@ -4,7 +4,7 @@ Este proyecto es un pipeline de datos de streaming diseñado para recolectar, pr
 
 El pipeline opera de la siguiente manera:
 
-1.  **Recolector de Datos  (main.py en Cloud Run): Un servicio de Cloud Run se activa mediante un programador (Cloud Scheduler) para ejecutar el script main.py. Este script consulta la API de WAQI, sube los datos a Cloud Storage y notifica a Pub/Sub.
+1.  **Recolector de Datos  (main.py en `Cloud Run`)**: Un servicio de Cloud Run se activa mediante un programador (Cloud Scheduler) para ejecutar el script main.py. Este script consulta la API de WAQI, sube los datos a Cloud Storage y notifica a Pub/Sub.
 2.  **Mensajería (`Google Pub/Sub`)**: Recibe las notificaciones de los nuevos archivos de datos subidos a Cloud Storage, sirviendo como la fuente de datos para el pipeline de Dataflow.
 3.  **Procesamiento (`Google Cloud Dataflow`)**: Un pipeline de streaming que lee los mensajes de Pub/Sub, descarga los archivos de datos desde Cloud Storage, los transforma y los prepara.
 4.  **Almacenamiento (`Google BigQuery`)**: El destino final donde se guardan los datos procesados en una tabla estructurada para su posterior análisis y visualización.
@@ -49,5 +49,6 @@ Para ejecutar este pipeline, debes seguir estos pasos:
     ```sh
     python dataflow_pipeline.py
     ```
+
 
 Una vez ejecutado, el trabajo de Dataflow se ejecutará de forma continua en la nube, procesando y almacenando los datos en BigQuery automáticamente.
